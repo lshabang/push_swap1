@@ -28,7 +28,16 @@ t_lst		*ls_tosplit(char **argv)
 	ls_isnum1(str_size, str);
 	while (str_size >= 0)
 	{
-		num = (int)(is_int(atoi_long(str[str_size])));
+		if (atoi_long(str[str_size]) < -2147483648
+				|| atoi_long(str[str_size]) > 2147483647)
+		{
+			free(str);
+			free(str[str_size]);
+			ft_putendl(str[str_size]);
+			ft_putendl_fd("Error", 2);
+			exit(0);
+		}
+		num = (int)(atoi_long(str[str_size]));
 		tmp = ls_lstnew(num);
 		if (stack == NULL)
 			stack = tmp;
