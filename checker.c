@@ -66,11 +66,14 @@ static void		instruction(t_lst *stack_a, t_lst *stack_b)
 
 	while (stack_b == NULL)
 	{
-		while ((get_next_line(0, &line)) == 1)
+		while ((get_next_line(0, &line)) == 1){
 			commands(line, &stack_a, &stack_b);
-		if (ft_strequ(ls_verify(stack_a), "OK") && stack_b == NULL)
+			free(line);
+		}
+		if (stack_b == NULL && ft_strequ(ls_verify(stack_a), "OK"))
 		{
 			free_lst(&stack_a);
+			
 			ft_putendl("OK");
 			exit(0);
 		}

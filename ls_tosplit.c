@@ -31,9 +31,11 @@ t_lst		*ls_tosplit(char **argv)
 		if (atoi_long(str[str_size]) < -2147483648
 				|| atoi_long(str[str_size]) > 2147483647)
 		{
+			while (str_size >= 0){
+				free(str[str_size]);
+				str_size--;
+			}
 			free(str);
-			free(str[str_size]);
-			ft_putendl(str[str_size]);
 			ft_putendl_fd("Error", 2);
 			exit(0);
 		}
